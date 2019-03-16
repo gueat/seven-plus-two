@@ -114,7 +114,7 @@ onload = function(){
 	
 	//点击小图
 	var ali1 = $("small").getElementsByTagName("li");
-	ali1[0].style.background = "url(http://127.0.0.1:8020/Seven%20plus%20two%20travel%20shopping%20mall/images/detail_images/bg.png) no-repeat -82px -65px"
+	ali1[0].style.background = "../img/bg.png) no-repeat -82px -65px"
 	for (var i=0; i<ali1.length; i++) {	
 		ali1[i].onclick = function(){
 //						var src = this.children[0].src;
@@ -123,7 +123,7 @@ onload = function(){
 			var bigSrc = src.replace("1_", "3_");
 			$("middleImg").children[0].src = middleSrc;
 			$("bigImg").src = bigSrc;
-			this.style.background = "url(http://127.0.0.1:8020/Seven%20plus%20two%20travel%20shopping%20mall/images/detail_images/bg.png) no-repeat -82px -65px";
+			this.style.background = "../img/bg.png) no-repeat -82px -65px";
 			
 		}
 		ali1[i].onmouseleave = function(){
@@ -131,7 +131,7 @@ onload = function(){
 			
 		}
 		ali1[i].onmouseenter = function(){
-			this.style.background = "url(http://127.0.0.1:8020/Seven%20plus%20two%20travel%20shopping%20mall/images/detail_images/bg.png) no-repeat -82px -65px";
+			this.style.background = "../img/bg.png) no-repeat -82px -65px";
 			
 		}
 	}
@@ -175,7 +175,37 @@ onload = function(){
 		}
 		$("aul").style.left =20*a+"px";
 		
-	} 
-	
-	
+	}
+
+
 }
+
+// 加入购物车
+	$('#adcat').click(function () {
+		console.log('加入购物车')
+        request_data = {
+            'goodsid':$(this).attr('data-goodsid')
+        }
+        // 保存当前操作按钮对象
+        var $that = $(this)
+        $.get('/addcart/', request_data, function (response) {
+            if (response.status == -1){  //未登录
+                // 设置cookie
+                $.cookie('back', 'detail', {expires: 3, path: '/'})
+                window.open('/login/', '_self')
+            } else if (response.status == 1){  //操作成功
+                // 设置个数
+                $that.prev().html(response.number)
+                // 设置显示
+                $that.prev().show()
+                $that.prev().prev().show()
+            }
+        })
+    })
+	$('#adcat').click(function () {
+		if ($(this)){
+			$('#buy>span').css('display','block')
+		} else {
+			$('#buy>span').css('display','none')
+		}
+	})

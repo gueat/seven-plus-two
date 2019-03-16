@@ -24,13 +24,13 @@
 	margin-top: 8px;
 	width: 70px;
 	height: 20px;
-	background: url(../../images/mycat_images/bg.png) no-repeat 0 -42px;
+	background: url(../img/bg.png) no-repeat 0 -42px;
 }
 #register #list2 .weibo{
 	margin-top: 8px;
 	width: 83px;
 	height: 20px;
-	background: url(../../images/mycat_images/bg.png) no-repeat -72px -42px;
+	background: url(../img/bg.png) no-repeat -72px -42px;
 }
 
 /**/

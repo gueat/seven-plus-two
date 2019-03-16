@@ -70,7 +70,8 @@
 				<h3>我的购物车</h3>
 				<div id="mycat_t">
 					<ul>
-						<li style="padding-left: 20px;"><input type="checkbox" checked="checked" id="allSelect">全选</li>
+						<li style="padding-left: 20px;">
+                            <input type="checkbox" checked="checked" id="allSelect" data-all="{{ isall|lower }}">全选</li>
 						<li>商品信息</li>
 						<li>单价（元）</li>
 						<li>数量</li>
@@ -80,19 +81,21 @@
 				</div>
 				<div id="mycat_c">
 					<ul id="mycat_ul">
-						<!--<li>
-							<input checked="checked" type="checkbox" id="ipt"/><img src="mycart/img/L2VjbW1lL2x2eW91bWFsbC9nb29kcy9nb29kcy83MjA2OC8yMDE3MDkxOS8yMDE3MDkxOTEwMzY0NjEyMjYuanBlZw==.auto.jpeg"/>
-							<span id="boom1">uto悠途秋冬长袖健身服男速干夜跑时尚外套女户外运动防风跑步衣【男】黑灰色 M（中）</span>
-							<span id="boom2">￥299.00</span>
-							<input type="button" value="-" id="ipt1" />
-							<input type="text"  value="1" id="ipt2"/>
-							<input type="button"  value="+"id="ipt3" />
-							
-							<span id="boom3">￥299.00</span>
-							<a href="#" id="boom4">删除</a>
-						</li>-->
+                        {% for cart in carts %}
+                            <li>
+                                <input checked="checked" type="checkbox" id="ipt" data-cardid="{{ cart.id }}" class="ipttt">
+                                <img src="{{ cart.goods.img }}"/>
+                                <span id="boom1">{{ cart.goods.specifics }}</span>
+                                <span id="boom2" data-price="{{ cart.goods.price }}">￥{{ cart.goods.price }}</span>
+                                <input type="button" value="-" id="ipt1" data-goodsid="{{ goods_list.id }}">
+                                <input type="text"  value="{{ cart.number }}" id="ipt2" data-number="{{ cart.number }}">
+                                <input type="button"  value="+" id="ipt3" data-goodsid="{{ goods_list.id }}">
+
+                                <span id="boom3">￥</span>
+                                <a href="{{ cart.isdelete }}" id="boom4">删除</a>
+                            </li>
+                        {% endfor %}
 					</ul>
-					
 				</div>
 				<div id="mycat_b">
 					<ul>
@@ -222,5 +225,5 @@
 	</body>
 </html>
 <script src="{% static 'index/js/jquery.js' %}"></script>
-		<script src="{% static 'index/js/jquery.cookie.js' %}"></script>
-		<script src="{% static 'mycart/js/mycat.js' %}"></script>
+<script src="{% static 'index/js/jquery.cookie.js' %}"></script>
+<script src="{% static 'mycart/js/mycat.js' %}"></script>

@@ -32,13 +32,23 @@ def index(request):
 def mycart(request):
     token = request.session.get('token')
     userid = cache.get(token)
-    response_dir = {
-        'user': None,
-    }
-    if userid:
+    if userid:  # 有登录才显示
         user = User.objects.get(pk=userid)
+        carts = user.cart_set.filter(number__gt=0)
+        isall = True
+        for cart in carts:
+            if not cart.isselect:
+                isall = False
+        response_dir = {
+            'user': None,
+            'carts': carts,
+            'isall': isall,
+        }
+
         response_dir['user'] = user
-    return render(request, 'mycat/mycart.html', context=response_dir)
+        return render(request, 'mycat/mycart.html', context=response_dir)
+    else:  # 未登录不显示
+        return render(request, 'login/login.html')
 
 
 def generate_token():
@@ -97,8 +107,7 @@ def register(request):
 
 def detail(request, num):
     goods_dir = Goods.objects.all()
-    goods_list = Goods.objects.filter(productid=num).first()
-
+    goods_list = Goods.objects.filter(pk=num).first()
     token = request.session.get('token')
     userid = cache.get(token)
     response_dir = {
@@ -134,4 +143,93 @@ def checkusername(request):
             'msg': '该帐号可以使用！'
         }
     # 返回json数据
+    return JsonResponse(response_data)
+
+
+def addcart(request):
+    # 获取token
+    token = request.session.get('token')
+    # 响应数据
+    response_data = {}
+    # 缓存
+    if token:
+        userid = cache.get(token)
+        if userid:  # 已经登录
+            user = User.objects.get(pk=userid)
+            goodsid = request.GET.get('goodsid')
+            goods = Goods.objects.get(pk=goodsid)
+            print(user,goodsid)
+            # 商品不存在： 添加新记录
+            # 商品存在： 修改number
+            carts = Cart.objects.filter(user=user).filter(goods=goods)
+            if carts.exists():
+                cart = carts.first()
+                cart.number = cart.number + 1
+                cart.save()
+            else:
+                cart = Cart()
+                cart.user = user
+                cart.goods = goods
+                cart.number = 1
+                cart.save()
+            response_data['status'] = 1
+            response_data['number'] = cart.number
+            response_data['msg'] = '添加{}购物车成功:{}'.format(cart.goods.specifics, cart.number)
+            return JsonResponse(response_data)
+    # 未登录
+    response_data['status'] = -1
+    response_data['msg'] = '请登录后操作'
+    return JsonResponse(response_data)
+
+
+def subcart(request):
+    # 商品
+    goodsid = request.GET.get('goodsid')
+    goods = Goods.objects.get(pk=goodsid)
+    # 用户
+    token = request.session.get('token')
+    userid = cache.get(token)
+    user = User.objects.get(pk=userid)
+    # 获取对应的购物车信息
+    cart = Cart.objects.filter(user=user).filter(goods=goods).first()
+    cart.number = cart.number - 1
+    cart.save()
+    response_data = {
+        'msg': '删减商品成功',
+        'status': 1,
+        'number': cart.number,
+    }
+    return JsonResponse(response_data)
+
+
+def changecartselect(request):
+    cartid = request.GET.get('cartid')
+    cart = Cart.objects.get(pk=cartid)
+    cart.isselect = not cart.isselect
+    cart.save()
+    response_data = {
+        'msg': '状态修改成功',
+        'status': 1,
+        'isselect': cart.isselect
+    }
+    return JsonResponse(response_data)
+
+
+def changecartall(request):
+    isall = request.GET.get('isall')
+    token = request.session.get('token')
+    userid = cache.get(token)
+    user = User.objects.get(pk=userid)
+    carts = user.cart_set.all()
+    if isall == 'true':
+        isall = True
+    else:
+        isall = False
+    for cart in carts:
+        cart.isselect = isall
+        cart.save()
+    response_data = {
+        'msg': '全选/取消全选 成功',
+        'status': 1
+    }
     return JsonResponse(response_data)
