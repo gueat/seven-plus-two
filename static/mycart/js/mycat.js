@@ -1,16 +1,15 @@
-$(function(){
-	$("#fxdc").on({
-		"mouseenter":function(){
-			$(".fxdc_left").css("display","block");
-		},
-		"mouseleave":function(){
-			$(".fxdc_left").css("display","none");
-		}
-	})
-	
-	
-	
-	//获取购物车的cookie数据,并用节点显示
+$(function() {
+    $("#fxdc").on({
+        "mouseenter": function () {
+            $(".fxdc_left").css("display", "block");
+        },
+        "mouseleave": function () {
+            $(".fxdc_left").css("display", "none");
+        }
+    })
+
+
+    //获取购物车的cookie数据,并用节点显示
 // 	refresh();
 // 	function refresh() {
 //
@@ -114,110 +113,110 @@ $(function(){
 // 		//刷新节点数据
 // 		refresh();
 // 	})
-	
-	
-	//勾选
-	// $("#mycat_ul").on("click", "#ipt", function(){
-	// 	var index = $(this).index("#mycat_ul #ipt");
-	//
-	// 	//获取cookie并修改
-	// 	var arr = JSON.parse($.cookie("cart"));
-	// 	arr[index].checked = !arr[index].checked;
-	//
-	// 	//覆盖原来的cookie
-	// 	$.cookie("cart", JSON.stringify(arr), {expires:30, path:"/"});
-	//
-	// 	//判断是否全选了
-	// 	isAllSelect();
-	//
-	// 	//刷新节点数据
-	// 	refresh();
-	// })
-	//
-	// //判断是否全部勾选了
-	// isAllSelect();
-	// function isAllSelect(){
-	//
-	// 	//判断是否为undefined
-	// 	var arr = $.cookie("cart");
-	// 	if (!arr) {
-	// 		return;
-	// 	}
-	//
-	// 	var arr = JSON.parse($.cookie("cart"));
-	//
-	// 	var sum = 0;
-	// 	for (var i=0; i<arr.length; i++) {
-	// 		sum += arr[i].checked;
-	// 	}
-	//
-	// 	//全选了
-	// 	if (arr.length!=0 && sum==arr.length) {
-	// 		$("#allSelect").prop("checked", true);
-	// 	}
-	// 	//未全选
-	// 	else {
-	// 		$("#allSelect").prop("checked", false);
-	// 	}
-	// }
-	//
-	// //全选
-	// $("#allSelect").click(function(){
-	// 	//判断是否为undefined
-	// 	var arr = $.cookie("cart");
-	// 	if (!arr) {
-	// 		return;
-	// 	}
-	//
-	// 	var arr = JSON.parse($.cookie("cart"));
-	// 	for (var i=0; i<arr.length; i++) {
-	// 		//全选
-	// 		if ($(this).prop("checked")){
-	// 			arr[i].checked = true;
-	// 		}
-	// 		//全不选
-	// 		else {
-	// 			arr[i].checked = false;
-	// 		}
-	// 	}
-	// 	$.cookie("cart", JSON.stringify(arr), {expires:30, path:"/"});
-	//
-	// 	//刷新
-	// 	refresh();
-	// })
-	//
-	// //删除选中
-	// $("#boom11").click(function(){
-	//
-	// 	//获取cookie并修改
-	// 	var arr = JSON.parse($.cookie("cart"));
-	//
-	// 	//将未选中的商品添加到新数组newArr中，再将newArr保存到cookie
-	// 	var newArr = [];
-	// 	for (var i=0; i<arr.length; i++) {
-	// 		if (!arr[i].checked) {
-	// 			newArr.push(arr[i]);
-	// 		}
-	// 	}
-	//
-	// 	//覆盖原来的cookie
-	// 	$.cookie("cart", JSON.stringify(newArr), {expires:30, path:"/"});
-	//
-	// 	isAllSelect();
-	//
-	// 	//刷新节点数据
-	// 	refresh();
-	// })
 
-	$('#ipt3').click(function () {
-		console.log('加入购物车')
+
+    //勾选
+    // $("#mycat_ul").on("click", "#ipt", function(){
+    // 	var index = $(this).index("#mycat_ul #ipt");
+    //
+    // 	//获取cookie并修改
+    // 	var arr = JSON.parse($.cookie("cart"));
+    // 	arr[index].checked = !arr[index].checked;
+    //
+    // 	//覆盖原来的cookie
+    // 	$.cookie("cart", JSON.stringify(arr), {expires:30, path:"/"});
+    //
+    // 	//判断是否全选了
+    // 	isAllSelect();
+    //
+    // 	//刷新节点数据
+    // 	refresh();
+    // })
+    //
+    // //判断是否全部勾选了
+    // isAllSelect();
+    // function isAllSelect(){
+    //
+    // 	//判断是否为undefined
+    // 	var arr = $.cookie("cart");
+    // 	if (!arr) {
+    // 		return;
+    // 	}
+    //
+    // 	var arr = JSON.parse($.cookie("cart"));
+    //
+    // 	var sum = 0;
+    // 	for (var i=0; i<arr.length; i++) {
+    // 		sum += arr[i].checked;
+    // 	}
+    //
+    // 	//全选了
+    // 	if (arr.length!=0 && sum==arr.length) {
+    // 		$("#allSelect").prop("checked", true);
+    // 	}
+    // 	//未全选
+    // 	else {
+    // 		$("#allSelect").prop("checked", false);
+    // 	}
+    // }
+    //
+    // //全选
+    // $("#allSelect").click(function(){
+    // 	//判断是否为undefined
+    // 	var arr = $.cookie("cart");
+    // 	if (!arr) {
+    // 		return;
+    // 	}
+    //
+    // 	var arr = JSON.parse($.cookie("cart"));
+    // 	for (var i=0; i<arr.length; i++) {
+    // 		//全选
+    // 		if ($(this).prop("checked")){
+    // 			arr[i].checked = true;
+    // 		}
+    // 		//全不选
+    // 		else {
+    // 			arr[i].checked = false;
+    // 		}
+    // 	}
+    // 	$.cookie("cart", JSON.stringify(arr), {expires:30, path:"/"});
+    //
+    // 	//刷新
+    // 	refresh();
+    // })
+    //
+    // //删除选中
+    // $("#boom11").click(function(){
+    //
+    // 	//获取cookie并修改
+    // 	var arr = JSON.parse($.cookie("cart"));
+    //
+    // 	//将未选中的商品添加到新数组newArr中，再将newArr保存到cookie
+    // 	var newArr = [];
+    // 	for (var i=0; i<arr.length; i++) {
+    // 		if (!arr[i].checked) {
+    // 			newArr.push(arr[i]);
+    // 		}
+    // 	}
+    //
+    // 	//覆盖原来的cookie
+    // 	$.cookie("cart", JSON.stringify(newArr), {expires:30, path:"/"});
+    //
+    // 	isAllSelect();
+    //
+    // 	//刷新节点数据
+    // 	refresh();
+    // })
+
+    $('#ipt3').click(function () {
+        console.log('加入购物车')
         request_data = {
-            'goodsid':$(this).attr('data-goodsid')
+            'goodsid': $(this).attr('data-goodsid')
         }
         // 保存当前操作按钮对象
         var $that = $(this)
         $.get('/addcart/', request_data, function (response) {
-        	if (response.status == 1){  //操作成功
+            if (response.status == 1) {  //操作成功
                 // 设置个数
                 $that.prev().html(response.number)
                 // 设置显示
@@ -227,15 +226,15 @@ $(function(){
         })
     })
 
-	// 点击减操作
+    // 点击减操作
     $('#ipt1').click(function () {
         var $that = $(this)
         request_data = {
             'goodsid': $(this).attr('data-goodsid')
         }
         $.get('/subcart/', request_data, function (response) {
-            if(response.status == 1){
-                if(response.number){
+            if (response.status == 1) {
+                if (response.number) {
                     $that.next().html(response.number)
                 } else {
                     $that.next().hide()
@@ -245,16 +244,16 @@ $(function(){
         })
     })
 
-	// 选中处理
+    // 选中处理
     $('.cart .confirm-wrapper').click(function () {
         var $span = $(this).find('span')
         request_data = {
-            'cartid':$(this).attr('data-cardid')
+            'cartid': $(this).attr('data-cardid')
         }
         $.get('/axf/changecartselect/', request_data, function (response) {
             console.log(response)
             if (response.status == 1) {
-                if (response.isselect){
+                if (response.isselect) {
                     $span.removeClass('no').addClass('glyphicon glyphicon-ok')
                 } else {
                     $span.removeClass('glyphicon glyphicon-ok').addClass('no')
@@ -266,11 +265,11 @@ $(function(){
 
     // 全选/取消全选
     $('#allSelect').click(function () {
-    	console.log($('#allSelect'))
+        console.log($('#allSelect'))
         var isall = $(this).attr('data-all')
-		isall = (isall == 'false') ? true : false
-		$(this).attr('data-all', isall)
-		request_data = {
+        isall = (isall == 'false') ? true : false
+        $(this).attr('data-all', isall)
+        request_data = {
             'isall': isall
         }
         $.get('/changecartall/', request_data, function (response) {
@@ -281,30 +280,11 @@ $(function(){
                     } else {  // 取消全选
                         $(this).prop("checked", true)
                     }
-                    total()
+                    // total()
                 })
             }
         })
     })
 
-	// 计算总数
-    function total() {
-        var sum = 0
-        // 遍历 获取 选中
-        $('#mycat_c li').each(function () {
-        	// console.log($('#mycat_c li'))
-            var $confirm = $(this).find('.ipttt')
-            var $content = $(this).find('#mycat_c')
-            // 选中状态
-            if ($confirm.find('.ipttt').length){
-                var price = $content.find('#boom2').attr('data-price')
-                var num = $content.find('#ipt2').attr('data-number')
-                sum += num * price
 
-            }
-            console.log(price)
-        })
-        // 显示
-        $('#mycat_b span').html(sum.toFixed(1))
-    }
 })

@@ -38,7 +38,7 @@
                     </li>
 					<li class="qq"><a href="#"></a></li>
 					<li class="weibo"><a href="#"></a></li>
-					<li class="kuan"><a href="#">我的订单</a></li>
+					<li class="kuan"><a href="{% url 'seven:orderlist' %}">我的订单</a></li>
 					<li class="kuan"><a href="#">站内消息</a></li>
 					<li class="kuan"><a href="#">帮助中心</a></li>
 				</ul>
@@ -101,8 +101,8 @@
 					<ul>
 						<li id="boom7"><a href="" id="boom11">删除选中</a></li>
 						<!--<li id="boom8">已选商品：<span>1</span></li>-->
-						<li id="boom9">合计：￥<span></span></li>
-						<li id="boom10"><a href="#">去结算</a></li>
+						<li id="boom9">合计：￥<span>{{ money }}</span></li>
+						<li id="boom10"><a href="{% url 'seven:mkorder' %}">去结算</a></li>
 					</ul>
 				</div>
 				<div id="mycat_f">

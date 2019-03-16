@@ -32,17 +32,20 @@ def index(request):
 def mycart(request):
     token = request.session.get('token')
     userid = cache.get(token)
+    money = 0
     if userid:  # 有登录才显示
         user = User.objects.get(pk=userid)
         carts = user.cart_set.filter(number__gt=0)
         isall = True
         for cart in carts:
+            money += int(cart.goods.price) * int(cart.number)
             if not cart.isselect:
                 isall = False
         response_dir = {
             'user': None,
             'carts': carts,
             'isall': isall,
+            'money': money,
         }
 
         response_dir['user'] = user
@@ -233,3 +236,46 @@ def changecartall(request):
         'status': 1
     }
     return JsonResponse(response_data)
+
+
+def generate_identifier():
+    temp = str(int(time.time())) + str(random.randrange(1000, 10000))
+    return temp
+
+
+def mkorder(request):
+    token = request.session.get('token')
+    userid = cache.get(token)
+    user = User.objects.get(pk=userid)
+    # 订单
+    order = Order()
+    order.user = user
+    order.identifier = generate_identifier()
+    order.save()
+    # 订单商品(购物车中选中)
+    carts = user.cart_set.filter(isselect=True)
+    for cart in carts:
+        orderGoods = OrderGoods()
+        orderGoods.order = order
+        orderGoods.goods = cart.goods
+        orderGoods.number = cart.number
+        orderGoods.save()
+        # 购物车中移除
+        cart.delete()
+    return render(request, 'order/orderdetail.html', context={'order': order})
+
+
+def orderlist(request):
+    token = request.session.get('token')
+    userid = cache.get(token)
+    user = User.objects.get(pk=userid)
+
+    orders = user.order_set.all()
+
+    return render(request, 'order/orderlist.html', context={'orders':orders})
+
+
+def orderdetail(request, identifier):
+    order = Order.objects.filter(identifier=identifier).first()
+
+    return render(request, 'order/orderdetail.html', context={'order': order})

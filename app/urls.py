@@ -15,4 +15,7 @@ urlpatterns = [
     url(r'^subcart/$', views.subcart, name='subcart'),  # 删减购物车
     url(r'^changecartselect/$', views.changecartselect, name='changecartselect'),  # 购物车商品选中状态
     url(r'^changecartall/$', views.changecartall, name='changecartall'),  # 全选/取消全选
+    url(r'^mkorder/$', views.mkorder, name='mkorder'),    # 生成订单
+    url(r'orderlist/$', views.orderlist, name='orderlist'), # 订单列表
+    url(r'^orderdetail/(?P<identifier>[\d.]+)/$', views.orderdetail, name='orderdetail'),  # 订单详情
 ]
