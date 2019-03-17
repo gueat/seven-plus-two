@@ -12,7 +12,6 @@
         <ul>
             {% for ordergoods in order.ordergoods_set.all %}
             <li>
-                <span>{{ ordergoods.goods.img }}</span>
                 <span>{{ ordergoods.goods.specifics }}</span>
                 &nbsp;<span>单价：{{ ordergoods.goods.price }}</span>
                 <i>数量x{{ ordergoods.number }}</i>
@@ -21,6 +20,7 @@
         </ul>
 
         <button class="btn btn-default">支付</button>
+        您还可以继续<a href="{% url 'seven:index' %}">选购</a>
     </div>
 </body>
 </html>
