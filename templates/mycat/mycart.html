@@ -79,17 +79,17 @@
 						<li>操作</li>
 					</ul>
 				</div>
-				<div id="mycat_c">
+				<div id="mycat_c" class="cart">
 					<ul id="mycat_ul">
                         {% for cart in carts %}
                             <li>
                                 <input checked="checked" type="checkbox" id="ipt" data-cardid="{{ cart.id }}" class="ipttt">
                                 <img src="{{ cart.goods.img }}"/>
                                 <span id="boom1">{{ cart.goods.specifics }}</span>
-                                <span id="boom2" data-price="{{ cart.goods.price }}">￥{{ cart.goods.price }}</span>
-                                <input type="button" value="-" id="ipt1" data-goodsid="{{ goods_list.id }}">
-                                <input type="text"  value="{{ cart.number }}" id="ipt2" data-number="{{ cart.number }}">
-                                <input type="button"  value="+" id="ipt3" data-goodsid="{{ goods_list.id }}">
+                                <span id="boom2" data-price="{{ cart.goods.price }}" class="price">￥{{ cart.goods.price }}</span>
+                                <input type="button" value="-" id="ipt1" data-goodsid="{{ cart.goods.id }}">
+                                <span type="text" id="ipt2" data-number="{{ cart.number }}" class="num">{{ cart.number }}</span>
+                                <input type="button"  value="+" id="ipt3" data-goodsid="{{ cart.goods.id }}">
 
                                 <span id="boom3">￥</span>
                                 <a href="{{ cart.isdelete }}" id="boom4">删除</a>
@@ -102,7 +102,7 @@
 						<li id="boom7"><a href="" id="boom11">删除选中</a></li>
 						<!--<li id="boom8">已选商品：<span>1</span></li>-->
 						<li id="boom9">合计：￥<span>{{ money }}</span></li>
-						<li id="boom10"><a href="{% url 'seven:mkorder' %}">去结算</a></li>
+						<li id="boom10"><a>去结算</a></li>
 					</ul>
 				</div>
 				<div id="mycat_f">

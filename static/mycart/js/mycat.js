@@ -228,10 +228,12 @@ $(function() {
 
     // 点击减操作
     $('#ipt1').click(function () {
+        console.log('减1')
         var $that = $(this)
         request_data = {
             'goodsid': $(this).attr('data-goodsid')
         }
+        console.log(request_data)
         $.get('/subcart/', request_data, function (response) {
             if (response.status == 1) {
                 if (response.number) {
@@ -286,10 +288,31 @@ $(function() {
         })
     })
 
+    // 计算总数
+    function total() {
+        var sum = 0
+
+        // 遍历 获取 选中
+        $('#mycat_c li').each(function () {
+            console.log('1111')
+            var price = $(this).find('.price').attr('data-price')
+            var num = $(this).find('.num').attr('data-number')
+            console.log(price)
+            console.log(num)
+            sum = num * price
+
+
+        })
+        // 显示
+        $('#mycat_c #boom3').html(sum)
+    }
+
     // 判断购物车是否有物品
     $('#boom10').click(function () {
-        if ($('#boom9') == 0){
+        if ($('#mycat_ul') == ''){
             alert('您购物车没有物品，还请先选购商品')
+        } else {
+            window.open('/mkorder/')
         }
     })
 })
