@@ -208,7 +208,8 @@ $(function() {
     // 	refresh();
     // })
 
-    $('#ipt3').click(function () {
+    // 加
+    $('.ipt3').click(function () {
         console.log('加入购物车')
         request_data = {
             'goodsid': $(this).attr('data-goodsid')
@@ -223,11 +224,12 @@ $(function() {
                 $that.prev().show()
                 $that.prev().prev().show()
             }
+            total()
         })
     })
 
-    // 点击减操作
-    $('#ipt1').click(function () {
+    // 减
+    $('.ipt11').click(function () {
         console.log('减1')
         var $that = $(this)
         request_data = {
@@ -242,23 +244,25 @@ $(function() {
                     $that.next().hide()
                     $that.hide()
                 }
+                total()
             }
         })
     })
 
     // 选中处理
-    $('.cart .confirm-wrapper').click(function () {
-        var $span = $(this).find('span')
+    $('.ipttt').click(function () {
+        var $input = $(this).find('input')
         request_data = {
-            'cartid': $(this).attr('data-cardid')
+            'cartid': $(this).attr('data-cardid'),
+            'isselect': $(this).attr('data-isselect')
         }
-        $.get('/axf/changecartselect/', request_data, function (response) {
+        $.get('/changecartselect/', request_data, function (response) {
             console.log(response)
             if (response.status == 1) {
                 if (response.isselect) {
-                    $span.removeClass('no').addClass('glyphicon glyphicon-ok')
+                    $input.attr("checked", false)
                 } else {
-                    $span.removeClass('glyphicon glyphicon-ok').addClass('no')
+                    $input.attr("checked", true)
                 }
                 total()
             }
@@ -278,41 +282,63 @@ $(function() {
             if (response.status == 1) {
                 $('.ipttt').each(function () {
                     if (isall) {  // 全选
-                        $(this).prop("checked", false)
-                    } else {  // 取消全选
                         $(this).prop("checked", true)
+                    } else {  // 取消全选
+                        $(this).prop("checked", false)
                     }
-                    // total()
+                    total()
                 })
             }
         })
     })
 
-    // 计算总数
+    total()
+    // 计算总价格
     function total() {
         var sum = 0
-
-        // 遍历 获取 选中
-        $('#mycat_c li').each(function () {
-            console.log('1111')
-            var price = $(this).find('.price').attr('data-price')
-            var num = $(this).find('.num').attr('data-number')
-            console.log(price)
-            console.log(num)
-            sum = num * price
-
-
+        var sum1 = 0
+        $('.cart1 li').each(function () {
+            if ($(this).find('.ipttt').length) {
+                console.log($(this).find('.ipttt').length)
+                var price = $(this).find('.price').attr('data-price')
+                var num = parseInt($(this).find('.num1').html())
+                sum += num * price
+                sum1 = num * price
+            }
+            $(this).find('.boom3 span').html(sum1)
         })
         // 显示
-        $('#mycat_c #boom3').html(sum)
-    }
-
-    // 判断购物车是否有物品
-    $('#boom10').click(function () {
-        if ($('#mycat_ul') == ''){
+        $('.cart2 .boom9 span').html(sum)
+        console.log(sum)
+        $('#boom10').click(function () {
+        if (sum == '0'){
             alert('您购物车没有物品，还请先选购商品')
         } else {
-            window.open('/mkorder/')
+            location.href = '/mkorder/'
+
         }
     })
+    }
+
+
+    // 删除
+    $('.boom4').click(function () {
+        request_data = {
+            'cartid':$(this).attr('data-cardid')
+        }
+
+        $.get('/deletecart/', request_data, function (response) {
+            if (response.status == 1) {
+                if (window.confirm('确定要删除该项吗?')) {
+                    $(this).parent().parent().remove();
+                    $(this).css('display','none')
+                    total();
+                }
+            }
+        })
+    })
+
+
+    // 判断购物车是否有物品
+
 })

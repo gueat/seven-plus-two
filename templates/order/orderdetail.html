@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -18,9 +20,12 @@
             </li>
             {% endfor %}
         </ul>
+        <p></p>
 
-        <button class="btn btn-default">支付</button>
+        <button class="btn btn-default" id="alipay" data-orderid="{{ order.id }}">支付</button>
         您还可以继续<a href="{% url 'seven:index' %}">选购</a>
     </div>
 </body>
 </html>
+<script src="{% static 'index/js/jquery.js' %}"></script>
+<script src="{% static 'mycart/js/orderdetail.js' %}"></script>

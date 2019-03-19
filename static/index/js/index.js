@@ -1,4 +1,13 @@
 $(function () {
+	var swiper = new Swiper('#topSwiper', {
+        pagination: '.swiper-pagination',
+        slidesPerView: 1,
+        paginationClickable: true,
+        loop: true,
+        spaceBetween: 30,
+        autoplay: 3000,
+        // effect: 'coverflow',
+    });
 
 onload = function(){
 	//top_none
@@ -70,16 +79,15 @@ onload = function(){
 
 	//lunbo();
 	//轮播
-	var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        slidesPerView: 1,
-        paginationClickable: true,
-        loop: true,
-        spaceBetween: 30,
-        autoplay: 3000,
-        // effect: 'coverflow',
-
-    });
+	// var swiper = new Swiper('#topSwiper', {
+    //     pagination: '.swiper-pagination',
+    //     slidesPerView: 1,
+    //     paginationClickable: true,
+    //     loop: true,
+    //     spaceBetween: 30,
+    //     autoplay: 3000,
+    //     // effect: 'coverflow',
+    // });
 
 	//lunbo
 	/*function $(id){

@@ -182,7 +182,7 @@ onload = function(){
 
 // 加入购物车
 	$('#adcat').click(function () {
-		console.log('加入购物车')
+		alert('加入购物车成功')
         request_data = {
             'goodsid':$(this).attr('data-goodsid')
         }
@@ -202,10 +202,8 @@ onload = function(){
             }
         })
     })
-	$('#adcat').click(function () {
-		if ($(this)){
-			$('#buy>span').css('display','block')
-		} else {
-			$('#buy>span').css('display','none')
-		}
+
+	$('.buy1').click(function () {
+		console.log('买')
+		window.open('')
 	})

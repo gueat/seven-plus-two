@@ -59,8 +59,7 @@
                     </ul>
                 </li>
                 <li><a href="{% url 'seven:mycart' %}"><span><img class="ol"
-                                                                  src="{% static 'index/img/register/cart.png' %}"></span>购物车
-                    0</a></li>
+                                                                  src="{% static 'index/img/register/cart.png' %}"></span>购物车</a></li>
                 <li class="da"><a href="#"><span><img class="ol"
                                                       src="{% static 'index/img/register/star.png' %}"></span>收藏夹<span><img
                         src="{% static 'index/img/register/down-arrow.png' %}"></span></a>
@@ -882,7 +881,7 @@
             </ul>
         </div>
         <div class="lunbo_center">
-            <div class="swiper-container">
+            <div class="swiper-container" id="topSwiper">
                 <div class="swiper-wrapper">
                     {% for wheel in wheels %}
                         <div class="swiper-slide">
@@ -893,7 +892,6 @@
                 <div class="swiper-pagination"></div>
             </div>
         </div>
-
         <div class="lunbo_right">
             <a href="#"><img src="{% static 'index/img/lunbo/pic1.jpg' %}"></a>
             <div class="box7">

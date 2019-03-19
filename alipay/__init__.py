@@ -122,17 +122,17 @@ class AliPay(object):
 
 # 初始化操作
 # 设置秘钥公钥的存放路径
-app_private_key_path = os.path.join(BASE_DIR, 'alipay/ying_yong_si_yao.txt')
-alipay_public_key_path = os.path.join(BASE_DIR, 'alipay/zhi_fu_bao_gong_yao.txt')
+ying_yong_si_yao = os.path.join(BASE_DIR, 'alipay/ying_yong_si_yao.txt')
+zhi_fu_bao_gong_yao = os.path.join(BASE_DIR, 'alipay/zhi_fu_bao_gong_yao.txt')
 
 # 根据自己申请的进行设置
 # app_notify_url: 服务器，支付完成后给服务器的通知，会传递支付订单相关参数，根据支付宝回传的参数进行订单状态的修改 (异步操作)
 # return_url: 客户端，支付完成后客户端进行的页面跳转(同步操作)
 alipay = AliPay(
     appid="2016092800612151",  # 设置签约的appid
-    app_notify_url="http://47.195./axf/appnotifyurl/",   # 异步支付通知url
-    app_private_key_path=app_private_key_path,  # 设置应用私钥
-    alipay_public_key_path=alipay_public_key_path,  # 支付宝的公钥，验证支付宝回传消息使用，不是你自己的公钥,
+    app_notify_url="http://127.0.0.1:2018/appnotifyurl/",   # 异步支付通知url
+    app_private_key_path=ying_yong_si_yao,  # 设置应用私钥
+    alipay_public_key_path=zhi_fu_bao_gong_yao,  # 支付宝的公钥，验证支付宝回传消息使用，不是你自己的公钥,
     debug=True,  # 默认False,            # 设置是否是沙箱环境，True是沙箱环境
-    return_url="http://39.98.84.248/axf/returnurl/",   # 同步支付通知url,在这个页面可以展示给用户看，只有付款成功后才会跳转
+    return_url="http://127.0.0.1:2018/returnurl/",   # 同步支付通知url,在这个页面可以展示给用户看，只有付款成功后才会跳转
 )

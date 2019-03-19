@@ -17,9 +17,12 @@ class User(models.Model):
 
 
 class Detail(models.Model):
-    img = models.CharField(max_length=100)
-    name = models.CharField(max_length=100)
-    price = models.FloatField()
+    productid = models.CharField(max_length=10)  # 图片ID
+    img = models.CharField(max_length=256)  # 图片
+    name = models.CharField(max_length=100)  # 图片名
+    specifics = models.CharField(max_length=100)  # 详情
+    price = models.FloatField()  # 价格
+    marketprice = models.FloatField()  # 原价
     class Meta:
         db_table = 'seven_detail'
 

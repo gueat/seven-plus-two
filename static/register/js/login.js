@@ -7,7 +7,9 @@ $(function(){
 			$(".fxdc_left").css("display","none");
 		}
 	})
-	
+
+	var flag1 = false;
+	var flag2 = false;
 	
 	$(".sub").on("click",function(){
 		if(!($("#txt input").val())){
@@ -17,6 +19,7 @@ $(function(){
 		else{
 			$("#txt i").css("display","none");
 			$("#txt input").css("border","");
+			flag1 = true;
 		}
 		if(!($("#psd input").val())){
 			$("#psd i").css("display","block");
@@ -25,6 +28,7 @@ $(function(){
 		else{
 			$("#psd i").css("display","none");
 			$("#psd input").css("border","");
+			flag2 = true;
 		}
 		
 		
@@ -40,32 +44,12 @@ $(function(){
 	})
 	
 	$(".sub").click(function(){
-		var xhr = new XMLHttpRequest();
-        xhr.open("post", "http://localhost/Seven plus two travel shopping mall/html/php/login.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        var str = "username="+$("#txt input").val()  + "&pwd="+$("#psd input").val();
-        xhr.send(str);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState==4 && xhr.status==200) {
-                obj = JSON.parse(xhr.responseText);
-                if(obj.status == 1){
-                	$("#psd i").css("display","none");
-                	$("#psd i").html(obj.msg);
-                	location.href = "index.html";
-                }
-                else{
-                	$("#psd i").css("display","block");
-                	$("#psd i").html(obj.msg);
-                }
-                console.log(obj.status);
-                
-                //json解析
-                //如果登录成功直接进入首页
-                //如果失败则弹出提示信息
-				
-            }
-        }
-		
+		if (flag1 && flag2){
+			$('form').submit();
+			console.log("提交")
+		} else {
+			$("#psd i").css("display","block");
+		}
 	})
 	
 
