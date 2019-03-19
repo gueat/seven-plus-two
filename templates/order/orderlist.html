@@ -1,13 +1,73 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
-	<head>
+<head>
 		<meta charset="UTF-8">
 		<title></title>
+
+		<link rel="stylesheet" type="text/css" href="{% static 'index/css/reset.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'index/css/index.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'register/css/register.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'mycart/css/mycat.css' %}">
+
 	</head>
-    <body>
+	<body>
+		<div id="register">
+			<div class="center">
+				<ul id="list1">
+					<li><a href="../index/index.html">七加二商城</a></li>
+					<li class="kuan"><a href="#"> 装备酷</a></li>
+					<li class="kuan"><a href="#"> 相伴</a></li>
+					<li class="kuan"><a href="#">移动端</a></li>
+				</ul>
+				<ul id="list2">
+					<li>您好,欢迎来到七加二商城！</li>
+					<li>
+                        {% if user %}
+                            <a>{{ user.username }}</a>
+                        {% else %}
+                            <a href="{% url 'seven:login' %}">登录</a>
+                        {% endif %}
+                    </li>
+					<li>
+                        {% if user %}
+                            <a href="{% url 'seven:logout' %}">注销</a>
+                        {% else %}
+                            <a href="{% url 'seven:register' %}">注册</a>
+                        {% endif %}
+                    </li>
+					<li class="qq"><a href="#"></a></li>
+					<li class="weibo"><a href="#"></a></li>
+					<li class="kuan"><a href="{% url 'seven:orderlist' %}">我的订单</a></li>
+					<li class="kuan"><a href="#">站内消息</a></li>
+					<li class="kuan"><a href="#">帮助中心</a></li>
+				</ul>
+				
+			</div>
+		</div>
+		<!---->
+		<div id="logo">
+			<div class="center">
+				<div class="logo_left">
+					<a href="{% url 'seven:index' %}"><img src="{% static 'mycart/img/201511170959056304.png' %}"></a>
+				</div>
+				<div class="logo_center" id="lct">
+					<div class="triangle"></div>
+					<img src="{% static 'index/img/logo/search.png' %}">
+					<form>
+						<input type="text" class="ipt1">
+						<input type="submit" value="搜索" class="ipt2">
+						
+					</form>
+					
+				</div>
+				
+			</div>
+		</div>
     <div class="orderlist">
         {% for order in orders %}
-            <p class="bg-info">
+            <p class="bg-info" style="float: left;margin-left: 50px">
                 <a href="{% url 'seven:orderdetail' order.identifier %}">
                     订单号: {{ order.identifier }} --
                     {% if order.status == 0 %}
@@ -23,8 +83,9 @@
                     {% endif %}
                 </a>
             </p>
-            <br>
         {% endfor %}
+        
     </div>
+
 </body>
 </html>

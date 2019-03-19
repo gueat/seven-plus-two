@@ -241,9 +241,9 @@ $(function() {
                 if (response.number) {
                     $that.next().html(response.number)
                 } else {
-                    $that.next().hide()
-                    $that.hide()
+
                 }
+
                 total()
             }
         })
@@ -298,8 +298,9 @@ $(function() {
         var sum = 0
         var sum1 = 0
         $('.cart1 li').each(function () {
-            if ($(this).find('.ipttt').length) {
-                console.log($(this).find('.ipttt').length)
+            var $num = $(this).find('.ipttt')
+            if ($num.val(true).length) {
+                console.log($num.val(true).length)
                 var price = $(this).find('.price').attr('data-price')
                 var num = parseInt($(this).find('.num1').html())
                 sum += num * price
@@ -323,17 +324,15 @@ $(function() {
 
     // 删除
     $('.boom4').click(function () {
+        window.confirm('确定要删除该项吗?')
         request_data = {
             'cartid':$(this).attr('data-cardid')
         }
-
         $.get('/deletecart/', request_data, function (response) {
             if (response.status == 1) {
-                if (window.confirm('确定要删除该项吗?')) {
-                    $(this).parent().parent().remove();
-                    $(this).css('display','none')
-                    total();
-                }
+                $(this).parent().parent().remove();
+                $(this).css('display', 'none')
+                total();
             }
         })
     })

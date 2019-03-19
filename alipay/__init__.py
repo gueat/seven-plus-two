@@ -130,9 +130,9 @@ zhi_fu_bao_gong_yao = os.path.join(BASE_DIR, 'alipay/zhi_fu_bao_gong_yao.txt')
 # return_url: 客户端，支付完成后客户端进行的页面跳转(同步操作)
 alipay = AliPay(
     appid="2016092800612151",  # 设置签约的appid
-    app_notify_url="http://127.0.0.1:2018/appnotifyurl/",   # 异步支付通知url
+    app_notify_url="http://47.112.195.186/appnotifyurl/",   # 异步支付通知url
     app_private_key_path=ying_yong_si_yao,  # 设置应用私钥
     alipay_public_key_path=zhi_fu_bao_gong_yao,  # 支付宝的公钥，验证支付宝回传消息使用，不是你自己的公钥,
     debug=True,  # 默认False,            # 设置是否是沙箱环境，True是沙箱环境
-    return_url="http://127.0.0.1:2018/returnurl/",   # 同步支付通知url,在这个页面可以展示给用户看，只有付款成功后才会跳转
+    return_url="http://47.112.195.186/returnurl/",   # 同步支付通知url,在这个页面可以展示给用户看，只有付款成功后才会跳转
 )

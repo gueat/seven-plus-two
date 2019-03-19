@@ -75,7 +75,7 @@ def login(request):
     elif request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        back = request.COOKIES.get('back')
+
         users = User.objects.filter(username=username)
         if users.exists():  # 这个用户存在
             user = users.first()
@@ -83,10 +83,9 @@ def login(request):
                 token = generate_token()  # 状态保持
                 cache.set(token, user.id, 60*60*24)
                 request.session['token'] = token
-                if back == 'index':
-                    return redirect('seven:index')
-                else:
-                    return redirect('seven:mycart')
+
+                return redirect('seven:index')
+
             else:  # 密码错误
                 return render(request, 'login/login.html', context={'p_err': '帐号或密码错误'})
         else:  # 用户名不存在
@@ -200,8 +199,9 @@ def subcart(request):
     user = User.objects.get(pk=userid)
     # 获取对应的购物车信息
     cart = Cart.objects.filter(user=user).filter(goods=goods).first()
-    cart.number = cart.number - 1
-    cart.save()
+    if cart.number >= 2:
+        cart.number = cart.number - 1
+        cart.save()
     response_data = {
         'msg': '删减商品成功',
         'status': 1,
@@ -293,7 +293,7 @@ def deletecart(request):
     # 购物车中移除
     cart.delete()
     response_data = {
-        'msg': '全选/取消全选 成功',
+        'msg': '删除成功',
         'status': 1
     }
 
@@ -363,10 +363,10 @@ def pay(request):
 
     # 支付地址信息
     data = alipay.direct_pay(
-        subject='7+2', # 显示标题
+        subject='seven puls two', # 显示标题
         out_trade_no=order.identifier,    # 订单号
         total_amount=str(sum),   # 支付金额
-        return_url='http://http://127.0.0.1:2018/returnurl/'
+        return_url='http://http://47.112.195.186/returnurl/'
     )
 
     # 支付地址

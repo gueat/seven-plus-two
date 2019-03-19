@@ -4,9 +4,65 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>坑爹订单详情</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'index/css/reset.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'index/css/index.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'register/css/register.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'mycart/css/mycat.css' %}">
 	</head>
     <body>
+    <div id="register">
+			<div class="center">
+				<ul id="list1">
+					<li><a href="../index/index.html">七加二商城</a></li>
+					<li class="kuan"><a href="#"> 装备酷</a></li>
+					<li class="kuan"><a href="#"> 相伴</a></li>
+					<li class="kuan"><a href="#">移动端</a></li>
+				</ul>
+				<ul id="list2">
+					<li>您好,欢迎来到七加二商城！</li>
+					<li>
+                        {% if user %}
+                            <a>{{ user.username }}</a>
+                        {% else %}
+                            <a href="{% url 'seven:login' %}">登录</a>
+                        {% endif %}
+                    </li>
+					<li>
+                        {% if user %}
+                            <a href="{% url 'seven:logout' %}">注销</a>
+                        {% else %}
+                            <a href="{% url 'seven:register' %}">注册</a>
+                        {% endif %}
+                    </li>
+					<li class="qq"><a href="#"></a></li>
+					<li class="weibo"><a href="#"></a></li>
+					<li class="kuan"><a href="{% url 'seven:orderlist' %}">我的订单</a></li>
+					<li class="kuan"><a href="#">站内消息</a></li>
+					<li class="kuan"><a href="#">帮助中心</a></li>
+				</ul>
+
+			</div>
+		</div>
+		<!---->
+    <div id="logo">
+			<div class="center">
+				<div class="logo_left">
+					<a href="{% url 'seven:index' %}"><img src="{% static 'mycart/img/201511170959056304.png' %}"></a>
+				</div>
+				<div class="logo_center" id="lct">
+					<div class="triangle"></div>
+					<img src="{% static 'index/img/logo/search.png' %}">
+					<form>
+						<input type="text" class="ipt1">
+						<input type="submit" value="搜索" class="ipt2">
+
+					</form>
+
+				</div>
+
+			</div>
+		</div>
     <div class="orderdetail">
         <p>
             订单号: {{ order.identifier }}
@@ -21,10 +77,44 @@
             {% endfor %}
         </ul>
         <p></p>
+        {% if order.status == 0 %}
+            <button class="btn btn-default" id="alipay" data-orderid="{{ order.id }}">支付</button>
+        {% endif %}
 
-        <button class="btn btn-default" id="alipay" data-orderid="{{ order.id }}">支付</button>
+        <br>
         您还可以继续<a href="{% url 'seven:index' %}">选购</a>
     </div>
+    <div id="foot">
+                <div class="center">
+                    <div id="footer">
+                        <p>©2005-2015 七加二驴友商城 版权所有，并保留所有权利。天津市华苑产业园区鑫茂民营科技园C2座6层AB单元</p>
+                        <p>Tel: 022-23857290-8031 QQ: 191391765</p>
+                        <p>ICP备案证书号:津ICP备14004534号-1</p>
+                    </div>
+                </div>
+            </div>
+    <div id="fxdc">
+			<div class="fxdc_left">
+				<ul>
+				<li><a href="../index/index.html"><img src="{% static 'register/img/wechat-pic.png' %}">
+				<dl>
+					<dt>七加二商城</dt>
+					<dt>APP下载</dt>
+					<dd>注册送5元</dd>
+				</dl></a></li>
+				<li><a href="../index/index.html"><img src="{% static 'register/img/wechat-pic.png' %}">
+				<dl>
+					<dt>七加二</dt>
+					<dt>官方微信</dt>
+					<dd>lvtuan_net</dd>
+				</dl></a></li>
+			</ul>
+			</div>
+			<div class="fxdc_right">
+				<img src="{% static 'register/img/icon_24.png' %}">
+			</div>
+		</div>
+
 </body>
 </html>
 <script src="{% static 'index/js/jquery.js' %}"></script>

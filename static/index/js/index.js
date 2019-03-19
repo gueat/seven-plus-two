@@ -1,12 +1,11 @@
 $(function () {
-	var swiper = new Swiper('#topSwiper', {
+	var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
         slidesPerView: 1,
         paginationClickable: true,
         loop: true,
         spaceBetween: 30,
         autoplay: 3000,
-        // effect: 'coverflow',
     });
 
 onload = function(){

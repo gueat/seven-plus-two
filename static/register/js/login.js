@@ -47,8 +47,6 @@ $(function(){
 		if (flag1 && flag2){
 			$('form').submit();
 			console.log("提交")
-		} else {
-			$("#psd i").css("display","block");
 		}
 	})
 	

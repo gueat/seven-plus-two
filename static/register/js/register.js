@@ -187,8 +187,6 @@ $(function(){
 		if(flag1&&flag2&&flag3&&flag4&&flag5) {
 			$('form').submit();
 			console.log("提交")
-		} else {
-			$("#ckbox i").css("display","block");
 		}
 	})
 

@@ -182,7 +182,6 @@ onload = function(){
 
 // 加入购物车
 	$('#adcat').click(function () {
-		alert('加入购物车成功')
         request_data = {
             'goodsid':$(this).attr('data-goodsid')
         }
@@ -192,6 +191,7 @@ onload = function(){
             if (response.status == -1){  //未登录
                 // 设置cookie
                 $.cookie('back', 'detail', {expires: 3, path: '/'})
+				alert('请先登录')
                 window.open('/login/', '_self')
             } else if (response.status == 1){  //操作成功
                 // 设置个数
@@ -199,6 +199,7 @@ onload = function(){
                 // 设置显示
                 $that.prev().show()
                 $that.prev().prev().show()
+				alert('加入购物车成功')
             }
         })
     })
